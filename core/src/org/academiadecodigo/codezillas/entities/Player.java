@@ -104,7 +104,7 @@ public class Player implements Entity {
     }
 
     public void create(){
-        img = new Texture("police1.png");
+        img = new Texture("police_32.png");
 
         playerRect = new Rectangle();
         playerRect.x = 0;
