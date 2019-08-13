@@ -2,7 +2,6 @@ package org.academiadecodigo.codezillas.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import org.academiadecodigo.codezillas.GameMap;
 
 public interface Entity {
 
@@ -12,7 +11,7 @@ public interface Entity {
 
     float velocity = 0;
 
-    GameMap map = null;
+    GameMap2 map = null;
 
     void moveX (float amount);
 
