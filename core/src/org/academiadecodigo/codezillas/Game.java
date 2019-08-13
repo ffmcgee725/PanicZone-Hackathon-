@@ -20,6 +20,7 @@ public class Game extends ApplicationAdapter {
 	GameMap gameMap;
 	private Player player = new Player();
 
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -27,8 +28,8 @@ public class Game extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.update();
-
 		gameMap = new TiledGameMap();
+        player.setGameMap(gameMap);
 	}
 
     @Override

@@ -20,4 +20,6 @@ public interface GameMap {
     public int getHeight();
 
     public int getLayers();
+
+    public boolean doesRectCollideWithMap(float x, float y, int width, int height);
 }
