@@ -37,7 +37,7 @@ public class TiledGameMap implements GameMap {
 
     @Override
     public TileType getTileTypeByLocation(int layer, float x, float y) {
-        return getTileTypeByCoordinate(layer, (int) (x/TileType.TILE_SIZE), (int) (y/TileType.TILE_SIZE));
+        return getTileTypeByCoordinate(layer, (int) (x / TileType.TILE_SIZE), (int) (y / TileType.TILE_SIZE));
     }
 
     @Override
@@ -56,6 +56,25 @@ public class TiledGameMap implements GameMap {
     }
 
     @Override
+    public boolean doesRectCollideWithMap(float x, float y, int width, int height) {
+        if (x < 0 || y < 0 || x + width > getPixelWidth() || y + height > getPixelHeight()) {
+            return true;
+        }
+
+        for (int row = (int) (y / TileType.TILE_SIZE); row < Math.ceil((y + height) / TileType.TILE_SIZE); row++) {
+            for (int col = (int) (x / TileType.TILE_SIZE); col < Math.ceil((x + width) / TileType.TILE_SIZE); col++) {
+                for (int layer = 0; layer < getLayers(); layer++) {
+                    TileType tileType = getTileTypeByCoordinate(layer, col, row);
+                    if (tileType != null && tileType.isCollidable()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public int getWidth() {
         return ((TiledMapTileLayer) tiledMap.getLayers().get(0)).getWidth();
     }
@@ -69,4 +88,13 @@ public class TiledGameMap implements GameMap {
     public int getLayers() {
         return tiledMap.getLayers().getCount();
     }
+
+    public int getPixelWidth() {
+        return getWidth() * TileType.TILE_SIZE;
+    }
+
+    public int getPixelHeight() {
+        return getHeight() * TileType.TILE_SIZE;
+    }
+
 }

@@ -5,18 +5,29 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import org.academiadecodigo.codezillas.map.GameMap;
+import org.academiadecodigo.codezillas.map.tiles.TileType;
 
 public class Player implements Entity {
     private float amount = 100;
     private Rectangle playerRect;
     private Texture img;
     private SpriteBatch batch;
+    private GameMap gameMap;
+    private TextureRegion[] regions = new TextureRegion[2];
 
 
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
 
     public float getAmount() {
         return this.amount;
@@ -33,33 +44,62 @@ public class Player implements Entity {
     @Override
     public void moveY(float amount) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            playerRect.y += amount * Gdx.graphics.getDeltaTime();
-            /*batch.draw(new Texture("police2.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police3.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police4.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police5.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police6.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police1.png"), playerRect.getX(), playerRect.getY());*/
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (!gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+
+
+                playerRect.y += amount * Gdx.graphics.getDeltaTime();
+            }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            playerRect.y -= amount * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (!gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.y -= amount * Gdx.graphics.getDeltaTime();
+            }
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.y -= 5;
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if (gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.y += 5;
+            }
+        }
+
 
     }
 
     @Override
     public void moveX(float amount) {
 
+
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            playerRect.x -= amount * Gdx.graphics.getDeltaTime();
+            if (!gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.x -= amount * Gdx.graphics.getDeltaTime();
+            }
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            playerRect.x += amount * Gdx.graphics.getDeltaTime();
+            if (!gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.x += amount * Gdx.graphics.getDeltaTime();
+            }
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.x += 5;
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (gameMap.doesRectCollideWithMap(playerRect.getX(), playerRect.getY(), (int) playerRect.getWidth(), (int) playerRect.getHeight())) {
+                playerRect.x -= 5;
+            }
+        }
 
     }
 
@@ -104,35 +144,16 @@ public class Player implements Entity {
     }
 
     public void create(){
-        img = new Texture("police_32.png");
+        img = new Texture("cop2.png");
 
         playerRect = new Rectangle();
-        playerRect.x = 0;
-        playerRect.y = 0;
+        playerRect.x = 250;
+        playerRect.y = 240;
         playerRect.height = img.getHeight();
         playerRect.width = img.getWidth();
     }
 
-    public void colision(){
-        if (playerRect.x < 0) {
-            playerRect.x = 0;
-        }
-
-        if (playerRect.x > 576) {
-            playerRect.x = 576;
-        }
-
-        if (playerRect.y < 0){
-            playerRect.y = 0;
-        }
-
-        if (playerRect.y > 576){
-            playerRect.y = 576;
-        }
-    }
-
-    public void playerMove(){
-        colision();
+    public void playerMove() {
         moveY(getAmount());
         moveX(getAmount());
     }

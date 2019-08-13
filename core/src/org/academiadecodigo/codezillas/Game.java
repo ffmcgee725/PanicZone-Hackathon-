@@ -22,6 +22,7 @@ public class Game extends ApplicationAdapter {
 	private Player player = new Player();
 	private Police police = new Police();
 
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -30,8 +31,9 @@ public class Game extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.update();
-
 		gameMap = new TiledGameMap();
+        player.setGameMap(gameMap);
+        police.setGameMap(gameMap);
 	}
 
     @Override
@@ -40,7 +42,7 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         createImage();
         player.playerMove();
-        police.moveX(police.getAmount());
+        police.moveDirection(police.getAmount());
     }
 
     @Override

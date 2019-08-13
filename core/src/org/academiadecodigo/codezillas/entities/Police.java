@@ -13,15 +13,19 @@ public class Police implements Entity {
     private Rectangle policeRect;
     private Texture img;
     private GameMap gameMap;
-    private Directions lastDirection = Directions.RIGHT;
+    private Directions lastDirection = Directions.LEFT;
     private Directions movingDirection;
 
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
     public void create() {
-        img = new Texture("police_32.png");
+        img = new Texture("cop2.png");
 
         policeRect = new Rectangle();
-        policeRect.x = 500;
-        policeRect.y = 500;
+        policeRect.x = 400;
+        policeRect.y = 420;
         policeRect.height = img.getHeight();
         policeRect.width = img.getWidth();
     }
@@ -41,79 +45,9 @@ public class Police implements Entity {
     @Override
     public void moveX(float amount) {
 
-        double rng = Math.random();
-
-        if (rng <= 0.9) {
-            movingDirection = lastDirection;
-        }
-
-        if (rng > 0.91 && rng <= 0.925) {
-            movingDirection = Directions.UP;
-        }
-
-        if (rng > 0.926 && rng <= 0.95) {
-            movingDirection = Directions.DOWN;
-        }
-
-        if (rng > 0.951 && rng <= 0.975) {
-            movingDirection = Directions.LEFT;
-        }
-
-        if (rng > 0.976 && rng <= 1.0) {
-            movingDirection = Directions.RIGHT;
-        }
-
-        switch (movingDirection) {
-            case UP:
-                policeRect.y += amount * Gdx.graphics.getDeltaTime();
-                lastDirection = Directions.UP;
-                break;
-            case DOWN:
-                policeRect.y -= amount * Gdx.graphics.getDeltaTime();
-                lastDirection = Directions.DOWN;
-                break;
-            case LEFT:
-                policeRect.x -= amount * Gdx.graphics.getDeltaTime();
-                lastDirection = Directions.LEFT;
-                break;
-            case RIGHT:
-                policeRect.x += amount * Gdx.graphics.getDeltaTime();
-                lastDirection = Directions.RIGHT;
-                break;
-            default:
-                policeRect.y += amount * Gdx.graphics.getDeltaTime();
-                lastDirection = Directions.UP;
-        }
-
-
-//
-//        if (rng <= 0.6) {
-//            policeRect.x -= amount * Gdx.graphics.getDeltaTime();
-//
-//        }
-//
-//        if (rng > 0.6 && rng <= 0.7) {
-//            policeRect.y += amount * Gdx.graphics.getDeltaTime();
-//            lastDirection = Directions.UP;
-//        }
-//
-//        if (rng > 0.7 && rng <= 0.8) {
-//            policeRect.y -= amount * Gdx.graphics.getDeltaTime();
-//            lastDirection = Directions.DOWN;
-//        }
-//
-//        if (rng > 0.8 && rng <= 0.9) {
-//            policeRect.x -= amount * Gdx.graphics.getDeltaTime();
-//            lastDirection = Directions.LEFT;
-//        }
-//
-//        if (rng > 0.9 && rng <= 1.0) {
-//            policeRect.x += amount * Gdx.graphics.getDeltaTime();
-//            lastDirection = Directions.RIGHT;
-//        }
-
 
     }
+
 
     @Override
     public void moveY(float amount) {
@@ -121,7 +55,74 @@ public class Police implements Entity {
     }
 
     public void moveDirection(float amount) {
-        double rng1 = Math.random();
+        double rng = Math.random();
+
+        if (rng <= 0.90) {
+            movingDirection = lastDirection;
+        }
+
+        if (rng > 0.910 && rng <= 0.925) {
+            movingDirection = Directions.UP;
+        }
+
+        if (rng > 0.926 && rng <= 0.950) {
+            movingDirection = Directions.DOWN;
+        }
+
+        if (rng > 0.951 && rng <= 0.975) {
+            movingDirection = Directions.LEFT;
+        }
+
+        if (rng > 0.976 && rng <= 1.000) {
+            movingDirection = Directions.RIGHT;
+        }
+
+        switch (movingDirection) {
+            case UP:
+                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                    policeRect.y += amount * Gdx.graphics.getDeltaTime();
+                    lastDirection = Directions.UP;
+                    break;
+                }
+                policeRect.y -= amount * Gdx.graphics.getDeltaTime();
+                lastDirection = Directions.DOWN;
+                break;
+            case DOWN:
+                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                    policeRect.y -= amount * Gdx.graphics.getDeltaTime();
+                    lastDirection = Directions.DOWN;
+                    break;
+                }
+                policeRect.y += amount * Gdx.graphics.getDeltaTime();
+                lastDirection = Directions.UP;
+                break;
+            case LEFT:
+                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                    policeRect.x -= amount * Gdx.graphics.getDeltaTime();
+                    lastDirection = Directions.LEFT;
+                    break;
+                }
+                policeRect.x += amount * Gdx.graphics.getDeltaTime();
+                lastDirection = Directions.RIGHT;
+                break;
+            case RIGHT:
+                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                    policeRect.x += amount * Gdx.graphics.getDeltaTime();
+                    lastDirection = Directions.RIGHT;
+                    break;
+                }
+                policeRect.x -= amount * Gdx.graphics.getDeltaTime();
+                lastDirection = Directions.LEFT;
+                break;
+            default:
+                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                    policeRect.y += amount * Gdx.graphics.getDeltaTime();
+                    lastDirection = Directions.UP;
+                    break;
+                }
+                policeRect.y -= amount * Gdx.graphics.getDeltaTime();
+                lastDirection = Directions.DOWN;
+        }
 
 
     }
@@ -143,12 +144,12 @@ public class Police implements Entity {
 
     @Override
     public float getX() {
-        return 0;
+        return pos.x;
     }
 
     @Override
     public float getY() {
-        return 0;
+        return pos.y;
     }
 
     @Override
