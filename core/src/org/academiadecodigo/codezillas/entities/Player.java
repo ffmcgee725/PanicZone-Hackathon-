@@ -39,7 +39,8 @@ public class Player implements Entity {
             batch.draw(new Texture("police3.png"), playerRect.getX(), playerRect.getY());
             batch.draw(new Texture("police4.png"), playerRect.getX(), playerRect.getY());
             batch.draw(new Texture("police5.png"), playerRect.getX(), playerRect.getY());
-            batch.draw(new Texture("police6.png"), playerRect.getX(), playerRect.getY());*/
+            batch.draw(new Texture("police6.png"), playerRect.getX(), playerRect.getY());
+            batch.draw(new Texture("police1.png"), playerRect.getX(), playerRect.getY());*/
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){

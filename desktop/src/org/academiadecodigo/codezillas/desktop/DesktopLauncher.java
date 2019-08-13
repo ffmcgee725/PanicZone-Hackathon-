@@ -6,13 +6,10 @@ import org.academiadecodigo.codezillas.Game;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
 		config.width = 640;
 		config.height = 640;
-
-		//config.fullscreen = true;
 
 		new LwjglApplication(new Game(), config);
 	}

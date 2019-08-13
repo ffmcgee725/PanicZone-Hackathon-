@@ -2,7 +2,7 @@ package org.academiadecodigo.codezillas.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import org.academiadecodigo.codezillas.GameMap;
+import org.academiadecodigo.codezillas.map.GameMap;
 
 public interface Entity {
 
