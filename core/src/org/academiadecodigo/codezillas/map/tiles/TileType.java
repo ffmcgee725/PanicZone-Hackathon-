@@ -3,8 +3,13 @@ package org.academiadecodigo.codezillas.map.tiles;
 import java.util.HashMap;
 
 public enum TileType {
-    COLLIDABLE(1, true, "collidable"),
-    NON_COLLIDABLE(2, false, "non_collidable");
+    GRASS(1, true, "Grass"),
+    DIRT(2, true, "Dirt"),
+    SKY(3, true, "Sky"),
+    LAVA(4, false, "Lava"),
+    CLOUD(5, true, "Cloud"),
+    STONE(6, true, "Stone");
+
 
     public static final int TILE_SIZE = 16;
 
@@ -37,6 +42,7 @@ public enum TileType {
     private static HashMap<Integer, TileType> tileMap;
 
     static {
+        tileMap = new HashMap<Integer, TileType>();
         for (TileType tileType : TileType.values()) {
             tileMap.put(tileType.getId(), tileType);
         }
