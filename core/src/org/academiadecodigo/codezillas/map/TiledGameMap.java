@@ -1,13 +1,26 @@
 package org.academiadecodigo.codezillas.map;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import org.academiadecodigo.codezillas.map.tiles.TileType;
 
-public class TiledMap implements GameMap {
+public class TiledGameMap implements GameMap {
+
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer tiledMapRenderer;
+
+    public TiledGameMap() {
+        tiledMap = new TmxMapLoader().load("testingTiledMap.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+    }
+
 
     @Override
     public void render(OrthographicCamera camera) {
-
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
     }
 
     @Override
@@ -17,7 +30,7 @@ public class TiledMap implements GameMap {
 
     @Override
     public void dispose() {
-
+        tiledMap.dispose();
     }
 
     @Override
