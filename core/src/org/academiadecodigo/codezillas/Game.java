@@ -12,20 +12,13 @@ import org.academiadecodigo.codezillas.entities.Player;
 
 
 public class Game extends ApplicationAdapter {
-    SpriteBatch batch;
-    Texture img;
-    private Rectangle playerRect;
+    private SpriteBatch batch;
+    private Player player = new Player();
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("police3.png");
-
-        playerRect = new Rectangle();
-        playerRect.x = 0;
-        playerRect.y = 0;
-        playerRect.height = img.getHeight();
-        playerRect.width = img.getWidth();
+        player.create();
     }
 
     @Override
@@ -33,38 +26,20 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         createImage();
-        userInput();
+        player.playerMove();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
+        player.getImg();
     }
 
     public void createImage(){
         batch.begin();
-        batch.draw(img,playerRect.x,playerRect.y);
+        batch.draw(player.getImg(),player.getPlayerRect().getX(),player.getPlayerRect().getY());
         batch.end();
     }
 
-
-    public void userInput(){
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            playerRect.x -= 400 * Gdx.graphics.getDeltaTime();
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            playerRect.x += 400 * Gdx.graphics.getDeltaTime();
-        }
-
-        if (playerRect.x < 0) {
-            playerRect.x = 0;
-        }
-
-        if (playerRect.x > 576) {
-            playerRect.x = 576;
-        }
-    }
 
 }
