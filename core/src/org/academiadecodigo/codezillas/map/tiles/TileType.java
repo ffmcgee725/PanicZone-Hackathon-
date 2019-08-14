@@ -5,13 +5,9 @@ import com.badlogic.gdx.math.Rectangle;
 import java.util.HashMap;
 
 public enum TileType {
-    GRASS(1, true, "Grass",new Rectangle()),
-    DIRT(2, true, "Dirt",new Rectangle()),
-    SKY(3, true, "Sky",new Rectangle()),
-    LAVA(4, false, "Lava", new Rectangle()),
-    CLOUD(5, true, "Cloud",new Rectangle()),
-    STONE(6, true, "Stone",new Rectangle());
-
+    BUILDING1(1, true, "Building_One", new Rectangle()),
+    BUILDING2(2, true, "Building_Two", new Rectangle()),
+    FLOOR(3, false, "Floor", new Rectangle());
 
     public static final int TILE_SIZE = 16;
 

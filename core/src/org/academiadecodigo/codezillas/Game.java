@@ -46,12 +46,11 @@ public class Game extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         createImage();
         player.playerMove();
         player.shoot();
-        police.moveDirection(police.getAmount());
-
-
+        police.moveDirection();
 
         if (player.getPlayerRect().overlaps(police.getPoliceRect())) {
             police.getPoliceRect().set(police.getPoliceRect()).set(100000, 1000000, 32, 32);

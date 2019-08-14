@@ -20,7 +20,7 @@ public class TiledGameMap implements GameMap {
     private ArrayList<Entity> entities;
 
     public TiledGameMap() {
-        tiledMap = new TmxMapLoader().load("testingTiledMap.tmx");
+        tiledMap = new TmxMapLoader().load("testMap.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         entities = new ArrayList<>();
         entities.add(Game.getPlayer());
