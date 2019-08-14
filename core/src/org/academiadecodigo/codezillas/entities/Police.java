@@ -5,8 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import org.academiadecodigo.codezillas.directions.Directions;
 import org.academiadecodigo.codezillas.map.GameMap;
+
+import java.util.ArrayList;
 
 public class Police implements Entity {
     private float amount = 150;
@@ -15,6 +18,7 @@ public class Police implements Entity {
     private GameMap gameMap;
     private Directions lastDirection = Directions.LEFT;
     private Directions movingDirection;
+    private ArrayList<Rectangle> polices = new ArrayList<>();
 
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
@@ -32,6 +36,10 @@ public class Police implements Entity {
 
     public Rectangle getPoliceRect() {
         return policeRect;
+    }
+
+    public ArrayList<Rectangle> getPolices() {
+        return polices;
     }
 
     public Texture getImg() {
