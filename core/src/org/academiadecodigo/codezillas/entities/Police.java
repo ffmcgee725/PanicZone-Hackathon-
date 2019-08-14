@@ -144,12 +144,12 @@ public class Police implements Entity {
 
     @Override
     public float getX() {
-        return pos.x;
+        return 0;
     }
 
     @Override
     public float getY() {
-        return pos.y;
+        return 0;
     }
 
     @Override

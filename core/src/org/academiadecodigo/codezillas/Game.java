@@ -43,6 +43,13 @@ public class Game extends ApplicationAdapter {
         createImage();
         player.playerMove();
         police.moveDirection(police.getAmount());
+
+        if(player.getPlayerRect().overlaps(police.getPoliceRect())){
+            police.getImg().dispose();
+            //TODO: implement gameOver
+
+        }
+
     }
 
     @Override

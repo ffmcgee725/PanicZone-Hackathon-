@@ -74,6 +74,7 @@ public class TiledGameMap implements GameMap {
         return false;
     }
 
+
     @Override
     public int getWidth() {
         return ((TiledMapTileLayer) tiledMap.getLayers().get(0)).getWidth();
