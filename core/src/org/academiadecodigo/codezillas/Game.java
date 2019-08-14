@@ -2,6 +2,7 @@ package org.academiadecodigo.codezillas;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,6 +19,7 @@ public class Game extends ApplicationAdapter {
     private static GameMap gameMap;
     private Police police = new Police();
     private Bullets bullets = new Bullets();
+    private Music music;
 
     public static Player getPlayer() {
         return player;
@@ -40,6 +42,10 @@ public class Game extends ApplicationAdapter {
         player.setGameMap(gameMap);
         police.setGameMap(gameMap);
         bullets.setGameMap(gameMap);
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
