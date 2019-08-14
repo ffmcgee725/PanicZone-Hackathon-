@@ -14,7 +14,7 @@ public class TiledGameMap implements GameMap {
     private OrthogonalTiledMapRenderer tiledMapRenderer;
 
     public TiledGameMap() {
-        tiledMap = new TmxMapLoader().load("testingTiledMap.tmx");
+        tiledMap = new TmxMapLoader().load("testMap.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 
