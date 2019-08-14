@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 import org.academiadecodigo.codezillas.entities.Player;
 import org.academiadecodigo.codezillas.entities.Police;
 import org.academiadecodigo.codezillas.entities.PoliceFactory;
@@ -23,12 +25,13 @@ public class Game extends ApplicationAdapter {
     GameMap gameMap;
     private Player player = new Player();
     private Police police = new Police();
-    private ArrayList<Rectangle> cops = new ArrayList<>();
-
+    private Array<Police> cops;
+    private long dropRate;
 
 
     @Override
     public void create() {
+        cops = new Array<>();
         batch = new SpriteBatch();
         player.create();
         police.create();
@@ -40,6 +43,12 @@ public class Game extends ApplicationAdapter {
         police.setGameMap(gameMap);
 
 
+        /*if (TimeUtils.nanoTime() - dropRate > 1000000000) {
+            cops.add(police);
+            dropRate = TimeUtils.nanoTime();
+        }*/
+
+
     }
 
     @Override
@@ -49,13 +58,6 @@ public class Game extends ApplicationAdapter {
 
         createImage();
         player.playerMove();
-        police.moveDirection(police.getAmount());
-
-
-        if (player.getPlayerRect().overlaps(police.getPoliceRect())) {
-            police.getPoliceRect().set(police.getPoliceRect()).set(100000, 1000000, 32, 32);
-
-        }
     }
 
     @Override
@@ -68,9 +70,31 @@ public class Game extends ApplicationAdapter {
         gameMap.render(camera);
         batch.begin();
         batch.draw(player.getImg(), player.getPlayerRect().getX(), player.getPlayerRect().getY());
-        batch.draw(police.getImg(), police.getPoliceRect().getX(), police.getPoliceRect().getY());
-        batch.draw();
+        //batch.draw(police.getImg(), police.getPoliceRect().getX(), police.getPoliceRect().getY());
+
+        spawnCops();
+
+        moveCops();
+
         batch.end();
+    }
+
+    public void spawnCops() {
+
+        for (Police cop : cops) {
+            batch.draw(cop.getImg(), cop.getX(), cop.getY());
+        }
+    }
+
+    public void moveCops() {
+        for (Police cop : cops) {
+            if (player.getPlayerRect().overlaps(cop.getPoliceRect())) {
+                cop.getPoliceRect().set(100000, 1000000, 32, 32);
+            }
+
+            cop.moveDirection();
+        }
+
     }
 
 

@@ -24,6 +24,7 @@ public class Police implements Entity {
         this.gameMap = gameMap;
     }
 
+
     public void create() {
         img = new Texture("cop2.png");
 
@@ -52,7 +53,7 @@ public class Police implements Entity {
 
     @Override
     public void moveX(float amount) {
-
+        policeRect.y -= amount * Gdx.graphics.getDeltaTime();
 
     }
 
@@ -62,7 +63,7 @@ public class Police implements Entity {
 
     }
 
-    public void moveDirection(float amount) {
+    public void moveDirection() {
         double rng = Math.random();
 
         if (rng <= 0.90) {
@@ -87,8 +88,14 @@ public class Police implements Entity {
 
         switch (movingDirection) {
             case UP:
-                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
-                    policeRect.y += amount * Gdx.graphics.getDeltaTime();
+                if (!gameMap.doesRectCollideWithMap
+                        (policeRect.getX()
+                                , policeRect.getY()
+                                , (int) policeRect.getWidth()
+                                , (int) policeRect.getHeight())) {
+                    policeRect.y += amount *
+                            Gdx.graphics.
+                                    getDeltaTime();
                     lastDirection = Directions.UP;
                     break;
                 }
@@ -105,7 +112,12 @@ public class Police implements Entity {
                 lastDirection = Directions.UP;
                 break;
             case LEFT:
-                if (!gameMap.doesRectCollideWithMap(policeRect.getX(), policeRect.getY(), (int) policeRect.getWidth(), (int) policeRect.getHeight())) {
+                if (!gameMap.
+                        doesRectCollideWithMap
+                                (policeRect.getX()
+                                        , policeRect.getY()
+                                        , (int) policeRect.getWidth()
+                                        , (int) policeRect.getHeight())) {
                     policeRect.x -= amount * Gdx.graphics.getDeltaTime();
                     lastDirection = Directions.LEFT;
                     break;
@@ -152,12 +164,12 @@ public class Police implements Entity {
 
     @Override
     public float getX() {
-        return 0;
+        return 400;
     }
 
     @Override
     public float getY() {
-        return 0;
+        return 420;
     }
 
     @Override
@@ -175,26 +187,5 @@ public class Police implements Entity {
         return getType().getHeight();
     }
 
-    public boolean colision() {
-        if (policeRect.x < 0) {
-            policeRect.x = 0;
-            return true;
-        }
 
-        if (policeRect.x > 576) {
-            policeRect.x = 576;
-            return true;
-        }
-
-        if (policeRect.y < 0) {
-            policeRect.y = 0;
-            return true;
-        }
-
-        if (policeRect.y > 576) {
-            policeRect.y = 576;
-            return true;
-        }
-        return false;
-    }
 }
