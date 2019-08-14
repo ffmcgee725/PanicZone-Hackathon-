@@ -6,8 +6,6 @@ import org.academiadecodigo.codezillas.map.GameMap;
 
 public interface Entity {
 
-    Vector2 pos = null;
-
     EntityType type = null;
 
     float velocity = 0;

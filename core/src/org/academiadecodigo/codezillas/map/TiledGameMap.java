@@ -6,16 +6,24 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import org.academiadecodigo.codezillas.Game;
+import org.academiadecodigo.codezillas.entities.Entity;
 import org.academiadecodigo.codezillas.map.tiles.TileType;
+
+import java.util.ArrayList;
 
 public class TiledGameMap implements GameMap {
 
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tiledMapRenderer;
 
+    private ArrayList<Entity> entities;
+
     public TiledGameMap() {
         tiledMap = new TmxMapLoader().load("testingTiledMap.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        entities = new ArrayList<>();
+        entities.add(Game.getPlayer());
     }
 
 

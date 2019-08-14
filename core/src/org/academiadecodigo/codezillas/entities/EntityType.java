@@ -3,7 +3,8 @@ package org.academiadecodigo.codezillas.entities;
 public enum EntityType {
     PLAYER("player", 16, 16),
     HOSTAGE("hostage", 16, 16),
-    POLICE("police", 16, 16);
+    POLICE("police", 16, 16),
+    BULLETS("bullets",16,16);
 
     private String id;
     private int height;
