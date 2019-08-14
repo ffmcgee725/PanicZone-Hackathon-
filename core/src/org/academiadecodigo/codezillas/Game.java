@@ -3,6 +3,7 @@ package org.academiadecodigo.codezillas;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ public class Game extends ApplicationAdapter {
     private Police police = new Police();
     private Bullets bullets = new Bullets();
     private Music music;
+    private Sound sound;
 
     public static Player getPlayer() {
         return player;
@@ -43,6 +45,7 @@ public class Game extends ApplicationAdapter {
         police.setGameMap(gameMap);
         bullets.setGameMap(gameMap);
 
+        sound = Gdx.audio.newSound(Gdx.files.internal("FTP.mp3"));
         music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
         music.setLooping(true);
         music.play();
@@ -60,6 +63,8 @@ public class Game extends ApplicationAdapter {
 
         if (player.getPlayerRect().overlaps(police.getPoliceRect())) {
             police.getPoliceRect().set(police.getPoliceRect()).set(100000, 1000000, 32, 32);
+            music.stop();
+            sound.play();
 
         }
     }

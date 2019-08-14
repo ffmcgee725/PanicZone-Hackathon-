@@ -194,7 +194,7 @@ public class Player implements Entity {
     }
 
     public void create() {
-        img = new Texture("cop2.png");
+        img = new Texture("player.png");
 
         playerRect = new Rectangle();
         playerRect.x = 200;

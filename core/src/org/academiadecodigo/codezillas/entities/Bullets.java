@@ -26,7 +26,7 @@ public class Bullets implements Entity {
 
 
     public void create() {
-        img = new Texture("cop2.png");
+        img = new Texture("player.png");
         batch = new SpriteBatch();
         setPlayer(Game.getPlayer());
 
