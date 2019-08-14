@@ -197,8 +197,8 @@ public class Player implements Entity {
         img = new Texture("cop2.png");
 
         playerRect = new Rectangle();
-        playerRect.x = 250;
-        playerRect.y = 240;
+        playerRect.x = 200;
+        playerRect.y = 200;
         pos = new Vector2(playerRect.x, playerRect.y);
         playerRect.height = img.getHeight();
         playerRect.width = img.getWidth();

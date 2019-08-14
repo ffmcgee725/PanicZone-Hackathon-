@@ -10,8 +10,6 @@ import org.academiadecodigo.codezillas.Game;
 import org.academiadecodigo.codezillas.directions.Directions;
 import org.academiadecodigo.codezillas.map.GameMap;
 
-import java.util.PrimitiveIterator;
-
 public class Bullets implements Entity {
 
     private Rectangle bulletRect;
