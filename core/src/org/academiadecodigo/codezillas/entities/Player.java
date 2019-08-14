@@ -25,6 +25,8 @@ public class Player implements Entity {
     private TextureRegion[] regions = new TextureRegion[2];
 
 
+
+
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
     }
@@ -143,7 +145,7 @@ public class Player implements Entity {
         return 0;
     }
 
-    public void create() {
+    public void create(){
         img = new Texture("cop2.png");
 
         playerRect = new Rectangle();
